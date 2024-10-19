@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تحويل الوحدات المترية</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1eded;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: rgb(177, 217, 243);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 450px;
+            box-shadow: 10px 10px 20px black;
+        }
+        select, input {
+            width: 90%;
+            padding: 10px;
+            margin: 15px 0;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color:rgb(79, 79, 212);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0f0355;
+        }
+        .result {
+            background: white;
+            border: 2px solid rgba(0, 0, 0, 0.329);
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2 style="text-align:center; text-shadow: 10px 10px 20px black;">تحويل الواحدات المترية</h2><hr>
+    <input type="number" id="value" placeholder="أدخل القيمة" />
+    <select id="fromUnit">
+        <option value="متر">متر</option>
+        <option value="سنتمتر">سنتمتر</option>
+        <option value="ملمتر">ملمتر</option>
+        <option value="كيلومتر">كيلومتر</option>
+    </select>
+    <select id="toUnit">
+        <option value="متر">متر</option>
+        <option value="سنتمتر">سنتمتر</option>
+        <option value="ملمتر">ملمتر</option>
+        <option value="كيلومتر">كيلومتر</option>
+    </select>
+    <button onclick="convert()">تحويل</button>
+    <h6 style="font-size: 20px;">النتيجة:</h6>
+    <div class="result" id="result"></div>
+</div>
+
+<script>
+    function convert() {
+        const value = parseFloat(document.getElementById("value").value);
+        const fromUnit = document.getElementById("fromUnit").value;
+        const toUnit = document.getElementById("toUnit").value;
+
+        const units = {
+            "متر": 1,
+            "سنتمتر": 0.01,
+            "ملمتر": 0.001,
+            "كيلومتر": 1000
+        };
+
+        if (isNaN(value)) {
+            document.getElementById("result").innerText = "يرجى إدخال قيمة صحيحة.";
+            return;
+        }
+
+        const result = (value * units[fromUnit]) / units[toUnit];
+        document.getElementById("result").innerText =` ${value} ${fromUnit} = ${result} ${toUnit} ` ; 
+    }
+</script>
+
+</body>
+</html>
